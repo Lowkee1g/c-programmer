@@ -2,7 +2,7 @@
 #include <math.h>
 
 void scan_data(char *operator, double *operand);
-double do_next_op(char operator, double operand, double *samlet);
+void do_next_op(char operator, double operand, double *samlet);
 
 int main(void)
 {
@@ -12,15 +12,20 @@ int main(void)
     char operator;
 
     do {
-    scan_data(&operator, &operand);
+        scan_data(&operator, &operand);
 
-    printf("\n%c %lf", operator, operand);
+        do_next_op(operator, operand, &akkumulatoren);
+        
+        if (operator == 'q'){
+            break;
+        }
+
+        printf("\n%lf", akkumulatoren);
     
-    do_next_op(operator, operand, &akkumulatoren);
-
-    printf("\n%lf", akkumulatoren);
     } while (operator != 'q');
-    
+
+    printf("You have quit the program\n");
+    printf("Final number is: %lf", akkumulatoren);
     
     return 0;
 }
@@ -37,7 +42,7 @@ void scan_data(char *operator, double *operand) {
 
 
 
-double do_next_op(char operator, double operand, double *samlet) {
+void do_next_op(char operator, double operand, double *samlet) {
     switch (operator)
     {
         //Binære operatorer
@@ -64,14 +69,17 @@ double do_next_op(char operator, double operand, double *samlet) {
         //Unære operatorer
     
     case '#':
-        
+        *samlet = sqrt(*samlet);
         break;
+
     case '%':
-        
+        *samlet = *samlet * -1;
         break;
+
     case '!':
-        
+        *samlet = 1 / *samlet;
         break;
+
     case 'q':
         
         break;
