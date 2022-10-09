@@ -36,7 +36,23 @@ int main(void)
 
 void scan_data(char *operator, double *operand) {
     printf("\nInsert a operator and an optional operand\n");
-    scanf(" %c %lf", &*operator, &*operand);
+    scanf(" %c", &*operator);
+    switch (*operator) {
+        case '#':
+            break;
+        case '%':
+            break;
+        case '!':
+            break;
+        case 'q':
+            break;
+    
+        default:
+            scanf(" %lf", &*operand);
+            break;
+    }
+    
+    
     return 0;
 }
 
