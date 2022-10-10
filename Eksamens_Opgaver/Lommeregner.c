@@ -3,6 +3,7 @@
 
 void scan_data(char *operator, double *operand);
 void do_next_op(char operator, double operand, double *samlet);
+void run_calculator(double akku, char opor);
 
 int main(void)
 {
@@ -15,12 +16,8 @@ int main(void)
         scan_data(&operator, &operand);
 
         do_next_op(operator, operand, &akkumulatoren);
-        
-        if (operator == 'q'){
-            break;
-        }
 
-        printf("\n%lf", akkumulatoren);
+        run_calculator(akkumulatoren, operator);
     
     } while (operator != 'q');
 
@@ -31,7 +28,13 @@ int main(void)
 }
 
 
+void run_calculator(double akku, char opor) {
+        if (opor == 'q'){
+            return;
+        }
 
+        printf("\n%lf", akku);
+}
 
 
 void scan_data(char *operator, double *operand) {
@@ -62,11 +65,11 @@ void do_next_op(char operator, double operand, double *samlet) {
     switch (operator)
     {
         //Binære operatorer
-    case '+':
+    case '+': //Plus
         *samlet = *samlet + operand;
         break;
 
-    case '-':
+    case '-': //minus
         *samlet = *samlet - operand;
         break;
 
