@@ -18,11 +18,10 @@ int main(void)
         do_next_op(operator, operand, &akkumulatoren);
 
         run_calculator(akkumulatoren, operator);
-    
     } while (operator != 'q');
 
-    printf("You have quit the program\n");
-    printf("Final number is: %lf", akkumulatoren);
+    printf("\nYou have quit the program\n");
+    printf("Final number is: %lf\n", akkumulatoren);
     
     return 0;
 }
@@ -33,7 +32,7 @@ void run_calculator(double akku, char opor) {
             return;
         }
 
-        printf("\n%lf", akku);
+        printf("\nResult so far: %lf", akku);
 }
 
 
@@ -42,11 +41,8 @@ void scan_data(char *operator, double *operand) {
     scanf(" %c", &*operator);
     switch (*operator) {
         case '#':
-            break;
         case '%':
-            break;
         case '!':
-            break;
         case 'q':
             break;
     
@@ -54,8 +50,6 @@ void scan_data(char *operator, double *operand) {
             scanf(" %lf", &*operand);
             break;
     }
-    
-    
     return 0;
 }
 
