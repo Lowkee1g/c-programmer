@@ -1,3 +1,4 @@
+//https://www.moodle.aau.dk/mod/page/view.php?id=1415084
 #include <stdio.h>
 #include <math.h>
 
@@ -7,11 +8,11 @@ void run_calculator(double akku, char opor);
 
 int main(void)
 {
-    //https://www.moodle.aau.dk/mod/page/view.php?id=1415084
     //Variabler
     double akkumulatoren = 0, operand;
     char operator;
 
+    //Kører en while som kører konstant med mindre operatoren er q.
     do {
         scan_data(&operator, &operand);
 
@@ -27,25 +28,21 @@ int main(void)
 }
 
 
-void run_calculator(double akku, char opor) {
-        if (opor == 'q'){
-            return;
-        }
-
-        printf("\nResult so far: %lf", akku);
-}
-
 
 void scan_data(char *operator, double *operand) {
+    //Scanner først efter operatoren
     printf("\nInsert a operator and an optional operand\n");
     scanf(" %c", &*operator);
-    switch (*operator) {
+
+    //Switch case som ser om den er binær eller ej
+    switch (*operator) { 
         case '#':
         case '%':
         case '!':
         case 'q':
             break;
     
+        //Hvis den er binær, spørger vi efter et tal 
         default:
             scanf(" %lf", &*operand);
             break;
@@ -67,37 +64,44 @@ void do_next_op(char operator, double operand, double *samlet) {
         *samlet = *samlet - operand;
         break;
 
-    case '/':
+    case '/': //Dividere
         *samlet = *samlet / operand;
         break;
 
-    case '*':
+    case '*': //Gange
         *samlet = *samlet * operand;
         break;
 
-    case '^':
+    case '^': //y i x'ne
         *samlet = pow(*samlet,2);
         break;
     
         //Unære operatorer
     
-    case '#':
+    case '#': //Kvadrat rod
         *samlet = sqrt(*samlet);
         break;
 
-    case '%':
+    case '%': //Flip fortegnet
         *samlet = *samlet * -1;
         break;
 
-    case '!':
+    case '!': // Divider 1 med x
         *samlet = 1 / *samlet;
-        break;
-
-    case 'q':
-        
         break;
 
     default:
         break;
     }
+}
+
+void run_calculator(double akku, char opor) {
+
+    //tjekker om vi har valgt at exit programmet
+    if (opor == 'q'){
+        return;
+    }
+
+    //Printer resultatet
+    printf("\nResult so far: %lf", akku);
 }
