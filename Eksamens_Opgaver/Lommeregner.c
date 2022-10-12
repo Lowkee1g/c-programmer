@@ -95,6 +95,7 @@ void do_next_op(char operator, double operand, double *samlet) {
     }
 }
 
+
 void run_calculator(double akku, char opor) {
 
     //tjekker om vi har valgt at exit programmet
