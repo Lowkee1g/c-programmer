@@ -32,6 +32,7 @@ int main(void)
 void scan_data(char *operator, double *operand) {
     //Scanner først efter operatoren
     printf("\nInsert a operator and an optional operand\n");
+    //gemmer char direkte via operatoren
     scanf(" %c", &*operator);
 
     //Switch case som ser om den er binær eller ej
