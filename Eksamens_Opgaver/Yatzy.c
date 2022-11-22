@@ -28,13 +28,15 @@ void printScoreboard(int *score);
 
 int main(void)
 {
-    int dice[] = {6,6,3,6,6,4,3,2,4,5,6,1,5};
+    int dice[] = {6,6,3,6,1,4,3,2,4,5,1,1,5,2,2,6,6,5,5,5,6,6,6,6};
     int scoreboard[17];
     int sizeofdice = sizeof(dice)/sizeof(dice[0]);
     
     //1-ere - 2 - 3 - 4 - 5 - 6
     findSingler(&dice, sizeofdice, &scoreboard);
     
+    //Tjek efter bonus
+    scoreboard[6] = findBonus(&scoreboard);
 
     //et par
     scoreboard[7] = findPar(&dice, sizeofdice, 1, &scoreboard);
@@ -77,11 +79,16 @@ int main(void)
 
 
 void findSingler(int *dice, int sizeofdice, int *score) {
+    
     for (int ojne = 1; ojne <= 6; ojne++) {
+        int max = 0;
         int tmp = 0;
         for (int i = 0; i < sizeofdice; i++) {
-            if (dice[i] == ojne) {
-                tmp += ojne;
+            if (max != 6) {
+                if (dice[i] == ojne) {
+                    tmp += ojne;
+                    max++;
+                }
             }
             
         }
@@ -90,6 +97,17 @@ void findSingler(int *dice, int sizeofdice, int *score) {
     }
 }
 
+int findBonus(int *score) {
+    int tmp = 0;
+    for (int i = 0; i < 6; i++) {
+        tmp += score[i];
+    }
+    
+    if (tmp > 63) {
+        return 50;
+    }
+    return 0;
+}
 
 int findPar(int *dice, int sizeofdice, int n, int *score) {
     int tmp;
@@ -212,7 +230,7 @@ int findChance( int *dice, int sizeofdice, int *score) {
     int chance = 0;
     for (int o = 6; o > 0; o--) {
         for (int i = 0; i <= sizeofdice; i++) {
-            if (n == 6) {
+            if (n == 5) {
                 printf("\nChance: %d", chance);
                 return chance;
             }
@@ -261,7 +279,10 @@ void printScoreboard(int *score) {
                         "TOTAL   :"};
     YellowOutputColor();
     printf("\n=YATZY=\n");
-    for (int i = 0; i < 14; i++) {
+    for (int i = 0; i < 17; i++) {
+        if (outputs[i] == "Et Par  :" || outputs[i] == "TOTAL   :") {
+            printf("\n");
+        }
         BlueOutputColor();
         printf("\n%s", outputs[i]);
         ResetOutputColor();
