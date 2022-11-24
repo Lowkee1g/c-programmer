@@ -24,20 +24,31 @@ void reset () {
 
 bilkort hurtigste(bilkort a, bilkort b);
 void print_bilkort(bilkort kort);
+void skriv_kort_til_fil(FILE *f, bilkort b);
 
 int main(void)
 {
     bilkort bil1 = {"Lotus", 200, 110, 8, 1973};
     bilkort bil2 = {"Mercedes", 215, 116, 9, 4520};
+    bilkort ba[] = {bil1, bil2};
     
     print_bilkort(bil1);
     print_bilkort(bil2);
 
     bilkort hurtigsteBil = hurtigste(bil1,bil2);
 
+    FILE *f = fopen("../fil.txt","w");
+
+    skriv_kort_til_fil(f, bil1);
+
+
     printf("Hurtigste bil : %s", hurtigsteBil.navn);
 
     return 0;
+}
+
+void skriv_kort_til_fil(FILE *f, bilkort b) {
+    fprintf(f, "%s", b.navn);
 }
 
 

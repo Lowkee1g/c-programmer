@@ -144,7 +144,7 @@ void findSingler(int **dice, int sizeofdice, int *score) {
         int max = 0;
         int tmp = 0;
         for (int i = 0; i < sizeofdice; i++) {
-            if (max != 6) {
+            if (max != 5) {
                 if (dice[ojne-1][i] == ojne) {
                     tmp += ojne;
                     max++;
@@ -233,6 +233,7 @@ int findHus(int **dice, int sizeofdice, int *score) {
                 if (o == dice[13][i]) {
                     found[o-1]++;
                 }
+                
             }
 
         }
