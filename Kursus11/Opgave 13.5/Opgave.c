@@ -29,7 +29,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
-    
+        
 
     indlaes_alle_personer(f, persons, 11); 
 
